@@ -17,7 +17,6 @@ public class UsuarioServiceImpl implements 	UsuarioService{
 	private UsuarioRepository usuarioRepository;
 	
 	public UsuarioServiceImpl(UsuarioRepository usuarioRepository) {
-		super();
 		this.usuarioRepository = usuarioRepository;
 	}
 
@@ -51,5 +50,10 @@ public class UsuarioServiceImpl implements 	UsuarioService{
 		if(existeUsuario) {
 			throw new RegraDeNegocioException("Já existe um usuário com este e-mail");
 		}
+	}
+	
+	@Override
+	public Optional<Usuario> obterPorId(Long id) {
+		return usuarioRepository.findById(id);
 	}
 }

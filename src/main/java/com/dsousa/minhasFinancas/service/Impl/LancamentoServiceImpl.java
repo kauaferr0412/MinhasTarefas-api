@@ -3,18 +3,22 @@ package com.dsousa.minhasFinancas.service.Impl;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.data.domain.ExampleMatcher.StringMatcher;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.dsousa.minhasFinancas.exceptions.RegraDeNegocioException;
 import com.dsousa.minhasFinancas.model.entity.Lancamento;
 import com.dsousa.minhasFinancas.model.enums.StatusLancamento;
+import com.dsousa.minhasFinancas.model.enums.TipoLancamento;
 import com.dsousa.minhasFinancas.model.repository.LancamentoRepository;
 import com.dsousa.minhasFinancas.service.LancamentosService;
 
+@Service
 public class LancamentoServiceImpl implements LancamentosService{
 
 	private LancamentoRepository lancamentoRepository;
@@ -26,7 +30,7 @@ public class LancamentoServiceImpl implements LancamentosService{
 	@Transactional
 	public Lancamento salvar(Lancamento lancamento) {
 		validar(lancamento);
-		lancamento.setStatus(StatusLancamento.PEDNENTE);
+		lancamento.setStatus( ( Objects.isNull(lancamento.getStatus()) ? StatusLancamento.PENDENTE : lancamento.getStatus()));
 		return lancamentoRepository.save(lancamento);
 	}
 
@@ -83,4 +87,24 @@ public class LancamentoServiceImpl implements LancamentosService{
 		}
 	}
 	
+	@Override
+	public Optional<Lancamento> obterPorId(Long id) {
+		return lancamentoRepository.findById(id);
+	}
+	
+	@Override
+	@Transactional(readOnly = true)
+	public BigDecimal obterSaldoPorUsuario(Long id) {
+		BigDecimal somaReceitas = lancamentoRepository.obterSaldoPorTipoLancamentoEUsuario(id, TipoLancamento.RECEITA);
+		BigDecimal somaDespesas = lancamentoRepository.obterSaldoPorTipoLancamentoEUsuario(id, TipoLancamento.DESPESA);
+
+		if(Objects.isNull(somaDespesas)) {
+			somaDespesas = BigDecimal.ZERO;
+		}
+		if(Objects.isNull(somaReceitas)) {
+			somaReceitas = BigDecimal.ZERO;
+		}
+		
+		return somaReceitas.subtract(somaDespesas);
+	}
 }

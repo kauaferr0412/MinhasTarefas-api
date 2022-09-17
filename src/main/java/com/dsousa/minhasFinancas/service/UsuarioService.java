@@ -1,5 +1,7 @@
 package com.dsousa.minhasFinancas.service;
 
+import java.util.Optional;
+
 import com.dsousa.minhasFinancas.model.entity.Usuario;
 
 public interface UsuarioService {
@@ -11,4 +13,5 @@ public interface UsuarioService {
 	
 	void validarEmail(String email);
 	
+	Optional<Usuario> obterPorId(Long id);
 }
