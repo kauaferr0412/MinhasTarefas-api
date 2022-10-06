@@ -56,13 +56,6 @@ public class TarefasServiceImpl implements TarefasService{
 						.withStringMatcher(StringMatcher.CONTAINING)));
 	}
 
-//	@Override
-//	public void atualizarStatus(Tarefas tarefa, StatusLancamento status) {
-////		lancamento.setStatus(status);
-////		atualizar(lancamento);
-//		
-//	}
-
 	@Override
 	public void validar(Tarefas tarefa) {
 		if(Objects.isNull(tarefa.getDescricao()) || tarefa.getDescricao().trim().equals("")) {

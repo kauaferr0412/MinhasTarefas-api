@@ -58,22 +58,7 @@ public class TarefaController {
 		}).orElseGet( () -> new ResponseEntity("tarefa não encontrado na base", HttpStatus.BAD_REQUEST));
 	}
 	
-//	@PutMapping("{id}/atualiza-status")
-//	public ResponseEntity atualizarStatus(@PathVariable("id") Long id, @RequestBody AtualizaStatusDTO dto) {
-//		return lancamentoService.obterPorId(id).map(ent -> {
-//			StatusLancamento status = StatusLancamento.valueOf(dto.getStatus());
-//			if(Objects.isNull(status)) {
-//				return ResponseEntity.badRequest().body("Não foi possivel atualizar o status. Informe um status valido.");
-//			}
-//			try {
-//				lancamentoService.atualizarStatus(ent, status);
-//				return ResponseEntity.ok(ent);
-//			}catch (RegraDeNegocioException e) {
-//				return ResponseEntity.badRequest().body(e.getMessage());
-//			}
-//		}).orElseGet( () -> new ResponseEntity("Lancamento não encontrado na base", HttpStatus.BAD_REQUEST));
-//	}
-	
+
 	@DeleteMapping("{id}")
 	public ResponseEntity deletar(@PathVariable("id") Long id) {
 		return tarefaService.obterPorId(id).map(ent -> {
