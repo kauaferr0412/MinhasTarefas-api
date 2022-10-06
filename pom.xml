@@ -7,11 +7,11 @@
 		<version>2.7.3</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.dsousa</groupId>
-	<artifactId>minhasFinancas</artifactId>
+	<groupId>com.kauaferr</groupId>
+	<artifactId>minhasTarefas</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>minhasFinancas</name>
-	<description>Projeto para gerenciamento de finanças pessoais</description>
+	<name>minhasTarefas</name>
+	<description>Projeto para gerenciamento de atividades pessoais</description>
 	<properties>
 		<java.version>1.8</java.version>
 	</properties>
