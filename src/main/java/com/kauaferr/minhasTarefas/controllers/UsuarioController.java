@@ -57,10 +57,11 @@ public class UsuarioController {
 	@GetMapping("/total")
 	public ResponseEntity obterTotalTarefasConcluidasENaoConcluidas(@RequestParam(value = "usuario") Long id) {
 		Optional<Usuario> user = userService.obterPorId(id);
+		
 		if(!user.isPresent()) {
 			return ResponseEntity.badRequest().body("Usuario não encontrado na base de dados");
-
 		}
+		
 		int[] saldo = tarefaService.obterTotalTarefasConcluidasENaoConcluidas(id);
 		return  ResponseEntity.ok(saldo);
 

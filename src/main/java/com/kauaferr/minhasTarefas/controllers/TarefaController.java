@@ -1,6 +1,7 @@
 package com.kauaferr.minhasTarefas.controllers;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 import org.springframework.http.HttpStatus;
@@ -91,7 +92,7 @@ public class TarefaController {
 		return Tarefas.builder()
 				.descricao(dto.getDescricao())
 				.usuario(userService.obterPorId(dto.getUsuario()).orElseThrow(() -> new RegraDeNegocioException("Usuário não informado para o Id informado")))
-				.concluido(dto.getConcluido()!=null ? dto.getConcluido(): false)
+				.concluido(Objects.nonNull(dto.getConcluido()) ? dto.getConcluido(): false)
 				.build();
 		
 		
