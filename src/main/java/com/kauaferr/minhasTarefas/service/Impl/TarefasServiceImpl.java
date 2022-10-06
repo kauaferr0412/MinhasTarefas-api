@@ -70,8 +70,6 @@ public class TarefasServiceImpl implements TarefasService{
 	
 	@Override
 	public Optional<Tarefas> obterPorId(Long id) {
-		System.out.println(id);
-
 		return tarefasRepository.findById(id);
 	}
 	
