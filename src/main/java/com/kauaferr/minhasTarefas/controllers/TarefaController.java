@@ -87,6 +87,12 @@ public class TarefaController {
 		return ResponseEntity.ok(tarefas);
 		
 	}
+
+	@GetMapping
+	public String liveEdnpoint() {
+		return "A API está em funcionamento";
+
+	}
 	
 	private Tarefas converterDTO(TarefasDTO dto) {
 		return Tarefas.builder()
