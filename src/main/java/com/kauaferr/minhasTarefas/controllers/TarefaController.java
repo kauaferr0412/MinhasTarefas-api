@@ -88,7 +88,7 @@ public class TarefaController {
 		
 	}
 
-	@GetMapping
+	@GetMapping("/live")
 	public String liveEdnpoint() {
 		return "A API está em funcionamento";
 
